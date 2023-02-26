@@ -30,7 +30,7 @@ module.exports.isLoggedInGoogle = (req, res, next) => {
     return next();
   }
   req.session.returnTo = req.originalUrl;
-  req.flash('error', 'You must be logged in with a Google account to access this page.');
+  req.flash('error', 'Bạn phải đăng nhập bằng tài khoản Google.');
   return res.redirect('/login');
 }
 
@@ -38,7 +38,7 @@ module.exports.isAuthor = async (req, res, next) => {
   const { id } = req.params;
   const place = await Place.findById(id);
   if (!place.author.equals(req.user._id)) {
-    req.flash("error", "You do not have permission to do that!");
+    req.flash("error", "Bạn không có quyển truy cập!");
     return res.redirect(`/places/${place._id}`)
   }
   next();
@@ -149,7 +149,7 @@ module.exports.isReviewAuthor = async (req, res, next) => {
   const review = await Review.findById(reviewId);
   const place = await Place.findById(id);
   if (!review.author.equals(req.user._id)) {
-    req.flash("error", "You do not have permission to do that!");
+    req.flash("error", "Bạn không có thẩm quyền truy cập!");
     return res.redirect(`/places/${place._id}`)
   }
   next();

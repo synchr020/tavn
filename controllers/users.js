@@ -36,7 +36,7 @@ module.exports.renderLogin = (req, res) => {
 }
 
 module.exports.login = (req, res) => {
-    req.flash("success", "Chào mừng bạn trở lại!");
+    req.flash("success",  `Chào mừng bạn trở lại!`);
     const redirectUrl = req.session.returnTo || "/places";
     delete req.session.returnTo;
     res.redirect(redirectUrl);
@@ -52,14 +52,14 @@ module.exports.loginWithGoogleCallback = (req, res, next) => {
       return next(err);
     }
     if (!user) {
-      req.flash('error', 'Could not log in with Google');
+      req.flash('error', 'Không thể đăng nhập bằng Google');
       return res.redirect('/login');
     }
     req.logIn(user, (err) => {
       if (err) {
         return next(err);
       }
-      req.flash('success', 'Chào mừng bạn trở lại!');
+      req.flash('success', `Chào mừng bạn !`);
        const redirectUrl = req.session.returnTo || "/places";
       delete req.session.returnTo;
       res.redirect(redirectUrl);
@@ -71,7 +71,7 @@ module.exports.loginWithGoogleCallback = (req, res, next) => {
 module.exports.logout = (req,res,next) => {
     req.logout(function (err) {
         if (err) { return next(err); }
-        req.flash("success", "Goodbye!");
+        req.flash("success", "Tạm biệt!");
         res.redirect("/places");
     })
     }

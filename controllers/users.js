@@ -1,4 +1,6 @@
 const User = require("../models/user");
+const passport = require('passport');
+
 
 module.exports.renderRegister = (req, res) => {
     res.render("users/register");
@@ -13,8 +15,8 @@ module.exports.register = async (req, res) => {
             if (err) {
                 return next(err);
             }
-            req.flash("success", "Welcome to Yelp Camp!");
-            res.redirect("/campgrounds");
+            req.flash("success", "Chào mừng bạn đến với TAVN");
+            res.redirect("/places");
         })
 
 
@@ -34,18 +36,43 @@ module.exports.renderLogin = (req, res) => {
 }
 
 module.exports.login = (req, res) => {
-    req.flash("success", "Welcome back!");
-    const redirectUrl = req.session.returnTo || "/campgrounds";
+    req.flash("success", "Chào mừng bạn trở lại!");
+    const redirectUrl = req.session.returnTo || "/places";
     delete req.session.returnTo;
     res.redirect(redirectUrl);
 
 }
+module.exports.loginWithGoogle = (req, res, next) => {
+  passport.authenticate('google', { scope: ['profile', 'email'] })(req, res, next);
+};
+
+module.exports.loginWithGoogleCallback = (req, res, next) => {
+  passport.authenticate('google', { failureRedirect: '/login' }, (err, user, info) => {
+    if (err) {
+      return next(err);
+    }
+    if (!user) {
+      req.flash('error', 'Could not log in with Google');
+      return res.redirect('/login');
+    }
+    req.logIn(user, (err) => {
+      if (err) {
+        return next(err);
+      }
+      req.flash('success', 'Chào mừng bạn trở lại!');
+       const redirectUrl = req.session.returnTo || "/places";
+      delete req.session.returnTo;
+      res.redirect(redirectUrl);
+      
+    });
+  })(req, res, next);
+};
 
 module.exports.logout = (req,res,next) => {
     req.logout(function (err) {
         if (err) { return next(err); }
         req.flash("success", "Goodbye!");
-        res.redirect("/campgrounds");
+        res.redirect("/places");
     })
     }
 

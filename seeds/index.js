@@ -1,10 +1,10 @@
 
 const mongoose = require("mongoose");
 const cities = require("./cities");
-const Campground = require('../models/campground');
+const Place = require('../models/place');
 const { places, descriptors } = require("./seedHelpers");
 mongoose.set('strictQuery', true);
-mongoose.connect("mongodb://127.0.0.1:27017/yelpcamp", {
+mongoose.connect("mongodb://127.0.0.1:27017/tavn", {
     useNewUrlParser: true,
     useUnifiedTopology: true
 
@@ -23,17 +23,17 @@ const sample = (array) => array[Math.floor(Math.random() * array.length)];
 
 
 const seedDB = async () => {
-    await Campground.deleteMany({});
+    await Place.deleteMany({});
     //xoa het du lieu
 
     for (let i = 0; i < 50; i++) {
         const random1000 = Math.floor(Math.random() * 1000);
         const price = Math.floor(Math.random() * 20) + 10;
-        const camp = new Campground({
-            author: "63e366dd63a4e3d25ca501cc",
+        const camp = new Place({
+            author: "63f8d226b71ecbb6f39b7b6b",
             location: `${cities[random1000].city}, ${cities[random1000].state}`,
             title: `${sample(descriptors)} ${sample(places)}`,
-            description: "come with us, the campground have nice view and beautiful tent!",
+            description: "come with us, the place have nice view and beautiful tent!",
             price,
             geometry: {
                 type: 'Point',

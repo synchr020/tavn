@@ -2,36 +2,32 @@
 mapboxgl.accessToken = mapToken;
 const map = new mapboxgl.Map({
     container: 'cluster-map',
-    // Choose from Mapbox's core styles, or make your own style with Mapbox Studio
+    
     style: 'mapbox://styles/mapbox/dark-v11',
-    center: [-103.5917, 40.6699],
-    zoom: 3
+    center: [105.5917, 21.6699],
+    zoom: 7
 });
 
 map.addControl(new mapboxgl.NavigationControl());
 
 map.on('load', () => {
     
-    map.addSource('campgrounds', {
+    map.addSource(`xxx`, {
         type: 'geojson',
         
-        data: campgrounds,
+        data: xxx,
         cluster: true,
-        clusterMaxZoom: 14, // Max zoom to cluster points on
-        clusterRadius: 50 // Radius of each cluster when clustering points (defaults to 50)
+        clusterMaxZoom: 14, 
+        clusterRadius: 50 
     });
 
     map.addLayer({
         id: 'clusters',
         type: 'circle',
-        source: 'campgrounds',
+        source: `xxx`,
         filter: ['has', 'point_count'],
         paint: {
-            // Use step expressions (https://docs.mapbox.com/mapbox-gl-js/style-spec/#expressions-step)
-            // with three steps to implement three types of circles:
-            //   * Blue, 20px circles when point count is less than 100
-            //   * Yellow, 30px circles when point count is between 100 and 750
-            //   * Pink, 40px circles when point count is greater than or equal to 750
+          
             'circle-color': [
                 'step',
                 ['get', 'point_count'],
@@ -56,7 +52,7 @@ map.on('load', () => {
     map.addLayer({
         id: 'cluster-count',
         type: 'symbol',
-        source: 'campgrounds',
+        source: `xxx`,
         filter: ['has', 'point_count'],
         layout: {
             'text-field': ['get', 'point_count_abbreviated'],
@@ -68,7 +64,7 @@ map.on('load', () => {
     map.addLayer({
         id: 'unclustered-point',
         type: 'circle',
-        source: 'campgrounds',
+        source: `xxx`,
         filter: ['!', ['has', 'point_count']],
         paint: {
             'circle-color': '#11b4da',
@@ -78,13 +74,13 @@ map.on('load', () => {
         }
     });
 
-    // inspect a cluster on click
+    
     map.on('click', 'clusters', (e) => {
         const features = map.queryRenderedFeatures(e.point, {
             layers: ['clusters']
         });
         const clusterId = features[0].properties.cluster_id;
-        map.getSource('campgrounds').getClusterExpansionZoom(
+        map.getSource(`xxx`).getClusterExpansionZoom(
             clusterId,
             (err, zoom) => {
                 if (err) return;
@@ -97,17 +93,11 @@ map.on('load', () => {
         );
     });
 
-    // When a click event occurs on a feature in
-    // the unclustered-point layer, open a popup at
-    // the location of the feature, with
-    // description HTML from its properties.
+    
     map.on('click', 'unclustered-point', (e) => {
         const {popUpMarkup} = e.features[0].properties;
         const coordinates = e.features[0].geometry.coordinates.slice();
         
-        // Ensure that if the map is zoomed out such that
-        // multiple copies of the feature are visible, the
-        // popup appears over the copy being pointed to.
         while (Math.abs(e.lngLat.lng - coordinates[0]) > 180) {
             coordinates[0] += e.lngLat.lng > coordinates[0] ? 360 : -360;
         }

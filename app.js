@@ -2,8 +2,6 @@ if (process.env.NODE_ENV !== "production") {
     require('dotenv').config();
 }
 
-
-
 const express = require('express');
 const mongoose = require("mongoose");
 const path = require("path");
@@ -14,18 +12,19 @@ const session = require("express-session");
 const flash = require("connect-flash");
 const passport = require("passport");
 const LocalStrategy = require("passport-local");
+const GoogleStrategy = require("passport-google-oauth20");
 const User = require("./models/user");
 const mongoSanitize = require('express-mongo-sanitize');
 const helmet = require("helmet");
 const userRoutes = require("./routes/users")
-const campgroundsRoutes = require("./routes/campgrounds");
+const placesRoutes = require("./routes/places");
 const reviewsRoutes = require("./routes/reviews");
 
 const MongoDBStore = require('connect-mongo');
 
 
 const dbUrl = process.env.DB_URL;
-//const dbUrl="mongodb://127.0.0.1:27017/yelpcamp";
+//const dbUrl="mongodb://127.0.0.1:27017/tavn";
 mongoose.set('strictQuery', true);
 mongoose.connect(dbUrl, {
     
@@ -61,6 +60,8 @@ const store = MongoDBStore.create({
 store.on("error",function(e){
 console.log("SESSION STORE ERROR",e)
 })
+
+
 const sessionConfig = {
     store,
     name: "session",
@@ -68,6 +69,7 @@ const sessionConfig = {
     resave: false,
     saveUninitialized: true,
     cookie:{
+        secure: false,
         httpOnly: true,
         expires: Date.now() + 1000 * 60 * 60 * 24 *7,
         maxAge: 1000 * 60 * 60 * 24 * 7
@@ -76,9 +78,79 @@ const sessionConfig = {
 
 }
 
+
+
+passport.use(new GoogleStrategy(
+{
+      clientID: process.env.googleClientID,
+      clientSecret: process.env.googleClientSecret,
+      callbackURL: 'http://localhost:3000/auth/google/callback',
+      passReqToCallback:true
+      
+    },
+    function(accessToken, refreshToken,request ,profile, done) {
+    User.findOne({ googleId: profile.id }, function(err, user) {
+      if (err) { return done(err); }
+      if (!user) {
+        
+        user = new User({
+          provider: "google",
+          googleId: profile.id,
+          username: profile.displayName,
+          email: profile.emails[0].value
+        });
+        user.save(function(err) {
+          if (err) { return done(err); }
+          return done(null, user);
+        });
+      } else {
+        
+        return done(null, user);
+      }
+    });
+  }
+   
+));
+
 app.use(session(sessionConfig));
+
+
 app.use(flash());
-//app.use(helmet({contentSecurityPolicy:false}));
+
+app.use(session({
+  store,
+  name:session,
+  secret: 'niasfdjsfdjksh',
+  resave: false,
+  saveUninitialized: false,
+  cookie:{
+        secure:false,
+        httpOnly: true,
+        expires: Date.now() + 1000 * 60 * 60 * 24 ,
+        maxAge: 1000 * 60 * 60 * 24 
+    }
+}));
+
+app.use(passport.initialize());
+app.use(passport.session());
+passport.serializeUser(User.serializeUser());
+passport.deserializeUser(User.deserializeUser());
+
+passport.use(new LocalStrategy(User.authenticate()));
+
+
+passport.serializeUser(function(user, done) {
+  done(null, user.id);
+});
+
+passport.deserializeUser(function(id, done) {
+   User.findById(id, (err, user) => {
+    done(err, user);
+  });
+});
+
+
+
 const scriptSrcUrls = [
     "https://stackpath.bootstrapcdn.com/",
     "https://api.tiles.mapbox.com/",
@@ -89,7 +161,7 @@ const scriptSrcUrls = [
     "https://res.cloudinary.com/dh312vfev",
     "https://thuthuatnhanh.com/"
 ];
-//This is the array that needs added to
+
 const styleSrcUrls = [
       "https://stackpath.bootstrapcdn.com/",
     "https://kit-free.fontawesome.com/",
@@ -136,18 +208,11 @@ app.use(
     })
 );
 
-app.use(passport.initialize());
-app.use(passport.session());
-passport.use(new LocalStrategy(User.authenticate()));
-
-passport.serializeUser(User.serializeUser());
-passport.deserializeUser(User.deserializeUser());
-
-
 
 app.use((req,res,next)=>{
  
   res.locals.currentUser = req.user;
+  
   res.locals.success =  req.flash("success");
   res.locals.error = req.flash("error");
   
@@ -155,8 +220,8 @@ app.use((req,res,next)=>{
 })
 
 app.use("/",userRoutes);
-app.use("/campgrounds", campgroundsRoutes);
-app.use("/campgrounds/:id/reviews",reviewsRoutes);
+app.use("/places", placesRoutes);
+app.use("/places/:id/reviews",reviewsRoutes);
 
 
 app.get("/", (req, res) => {

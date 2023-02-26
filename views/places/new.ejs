@@ -1,0 +1,53 @@
+<% layout('layouts/boilerplate')%>
+<div class="row">
+    <h1 class="text-center">Thêm địa điểm du lịch của bạn.</h1>
+    <div class="col-6 offset-3 mb-3">
+        <form action="/places" method="POST" novalidate class="validated-form" enctype="multipart/form-data">
+            <div class="mb-3">
+                <label class="form-label" for="title">Title</label>
+                <input class="form-control" type="text" id="title" name="place[title]" required>
+                <div class="valid-feedback">
+                    Ok!
+                </div>
+            </div>
+            <div class="mb-3">
+                <label class="form-label" for="location">Địa điểm</label>
+                <input class="form-control" type="text" id="location" name="place[location]" required>
+                <div class="valid-feedback">
+                    Ok!
+                </div>
+            </div>
+            
+            <div class="mb-3">
+                <label class="form-label" for="price">Giá vé vào cửa</label>
+                <div class="input-group">
+                    <span class="input-group-text" id="price-label">VNĐ</span>
+                    <input type="text" class="form-control" id="price" placeholder="0" aria-label="price"
+                        aria-describedby="price-label" name="place[price]" required>
+                </div>
+                <div class="valid-feedback">
+                    Ok!
+                </div>
+            </div>
+
+            <div class="mb-3">
+                <label class="form-label" for="description">Mô tả</label>
+                <textarea class="form-control" type="text" id="description" name="place[description]"
+                    required></textarea>
+                <div class="valid-feedback">
+                    Ok!
+                </div>
+            </div>
+            <div class="mb-3">
+                <label for="image" class="form-label">Thêm ảnh </label>
+                <input class="form-control" name="image" type="file" id="image" multiple>
+              </div>
+
+            <div class="mb-3">
+                <button class="btn btn-success">Thêm khu du lịch</button>
+            </div>
+        </form>
+        
+        <a class="" href="/places"></a>
+    </div>
+</div>

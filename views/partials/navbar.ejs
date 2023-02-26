@@ -1,19 +1,23 @@
 <nav class="navbar navbar-dark  sticky-top navbar-expand-lg bg-dark ">
+  
     <div class="container-fluid">
-      <a class="navbar-brand" href="#">YelpCamp</a>
+     
+      <a class="navbar-brand" href="#">TAVN</a>
+    
+     
       <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>
       </button>
       <div class="collapse navbar-collapse" id="navbarSupportedContent">
         <ul class="navbar-nav me-auto mb-2 mb-lg-0">
           <li class="nav-item">
-            <a class="nav-link active" aria-current="page" href="/">Home</a>
+            <a class="nav-link active" aria-current="page" href="/">Trang Chủ</a>
           </li>
           <li class="nav-item">
-            <a class="nav-link active" href="/campgrounds">Campgrounds</a>
+            <a class="nav-link active" href="/places">Địa điểm</a>
           </li>
           <li class="nav-item">
-             <a class="nav-link active" href="/campgrounds/new">New Campground</a>
+             <a class="nav-link active" href="/places/new">Thêm Địa Điểm</a>
            </li>
          
           
@@ -22,10 +26,10 @@
          <%   if(!currentUser){ %>
 
           
-          <a href="/login" class="active nav-link">Login</a>
-          <a href="/register" class="active nav-link">Register</a>
+          <a href="/login" class="active nav-link">Đăng nhập</a>
+          <a href="/register" class="active nav-link">Đăng Ký</a>
           <% } else { %> 
-          <a href="/logout" class="active nav-link">Logout</a>
+          <a href="/logout" class="active nav-link">Đăng Xuất</a>
             <% } %> 
       </div>
       </div>

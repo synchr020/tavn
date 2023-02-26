@@ -1,39 +1,48 @@
 <% layout('layouts/boilerplate') %> 
-<% layout('layouts/boilerplate')%>
+<link rel="stylesheet" href="/stylesheets/button.css">
 
- <div class="container d-flex  justify-content-center align-items-center m-3">
-  <div class="row flex-fill">                <!--PAY ATTENTION TO THIS LINE-->
+
+ <div class="container d-flex  justify-content-center align-items-center ">
+  <div class="row flex-fill">              
     <div class="col-md-6 offset-md-3">     
       <div class="card shadow ">
-         <img src="https://images.unsplash.com/photo-1571863533956-01c88e79957e?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1267&q=80"
-                    alt="" class="card-img-top" />
+         
        <div class="card-body">
-         <h5 class="card-title">Register</h5>
+         <h5 class="card-title">Đăng ký</h5>
           <form action="/register" class="validated-form" method="post" novalidate>
     <div class="mb-3">
-        <label class="form-label" for="username">Username</label>
+        <label class="form-label" for="username">Tên đăng nhập</label>
         <input class="form-control" type="text"id="username" name="username" autofocus required>
         <div class="valid-feedback">
-            Look good! 
+           Ok! 
         </div>
     </div>
     <div class="mb-3">
         <label class="form-label" for="email">Email</label>
         <input class="form-control" type="email" id="email" name="email" required>
         <div class="valid-feedback">
-            Look good! 
+            Ok! 
         </div>
     </div>
     <div class="mb-3">
-        <label class="form-label" for="password">Password</label>
+        <label class="form-label" for="password">Mật khẩu</label>
         <input class="form-control" type="password" id="password" name="password" required>
         <div class="valid-feedback">
-            Look good!
+            Ok!
         </div>
     </div>
    <div class="d-grid gap-2 mb-1 col-12 mx-auto">
-      <button class="btn btn-success" >Login</button>
+      <button class="btn btn-success p-2 " >Đăng ký ngay!</button>
  </div> 
+    <div class="mb-3 d-grid gap-2 mb-1 col-12 mx-auto">
+         <p style="margin-bottom: 7px; margin-top: 10px; overflow: hidden; text-align: center; font-size: 14px;  color: #727475;
+; font-weight: bold;">HOẶC</p>
+            <a href="/auth/google" class="btn  btn-bordered dn2">
+    <svg xmlns="https://www.w3.org/2000/svg" width="28" height="28" viewBox="0 0 48 48" aria-hidden="true" class="L5wZDc"><path fill="#4285F4" d="M45.12 24.5c0-1.56-.14-3.06-.4-4.5H24v8.51h11.84c-.51 2.75-2.06 5.08-4.39 6.64v5.52h7.11c4.16-3.83 6.56-9.47 6.56-16.17z"></path><path fill="#34A853" d="M24 46c5.94 0 10.92-1.97 14.56-5.33l-7.11-5.52c-1.97 1.32-4.49 2.1-7.45 2.1-5.73 0-10.58-3.87-12.31-9.07H4.34v5.7C7.96 41.07 15.4 46 24 46z"></path><path fill="#FBBC05" d="M11.69 28.18C11.25 26.86 11 25.45 11 24s.25-2.86.69-4.18v-5.7H4.34C2.85 17.09 2 20.45 2 24c0 3.55.85 6.91 2.34 9.88l7.35-5.7z"></path><path fill="#EA4335" d="M24 10.75c3.23 0 6.13 1.11 8.41 3.29l6.31-6.31C34.91 4.18 29.93 2 24 2 15.4 2 7.96 6.93 4.34 14.12l7.35 5.7c1.73-5.2 6.58-9.07 12.31-9.07z"></path><path fill="none" d="M2 2h44v44H2z"></path></svg>
+    <i class="px-2 fab fa-google"></i>  Đăng nhập bằng Google
+</a>
+
+                </div>
 </form>      
 </div>
       </div>

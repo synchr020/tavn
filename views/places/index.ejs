@@ -1,0 +1,122 @@
+<% layout('layouts/boilerplate') %>
+
+<script>
+        const mapToken = "<%-process.env.MAPBOX_TOKEN%>";
+          
+        const xxx = { features: <%-JSON.stringify(xxx) %>};
+     
+        
+    </script>
+    
+    <div>
+        <div id="cluster-map"></div>
+        <div class="my-4"></div>
+        
+
+    <div class="">
+    <h1> Tất cả khu du lịch</h1>
+        <div>
+            <% for (let place of places) {%>    
+            
+                <div class="card mb-3">
+                    <div class="row">
+                        <div class="col-md-4">
+                            <% if (place.images.length) { %>
+                                <img class="img-fluid" alt="" src="<%=place.images[0].url%>">
+                                <% } else { %>
+                                    <img class="img-fluid" alt=""
+                                        src="https://hinhnen123.com/wp-content/uploads/2021/07/hinh-anh-thien-nhien-dep-nhat-12.jpg">
+                                    <% } %>
+                        </div>
+                        <div class="col-md-8">
+                            <div class="card-body">
+                                <h5 class="card-title">
+                                    <%=place.title %>
+                                </h5>
+
+                                <p class="card-text">
+                                    <%=place.description %>
+                                </p>
+                                <p class="card-text">
+                                    <small class="text-muted">
+                                        <%=place.location %>
+                                    </small>
+                                </p>
+                                <a class="btn btn-primary" href="/places/<%=place._id%>">Xem <%=place.title %> </a>
+
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <% } %>
+        </div>
+        
+        <div class="row">
+            <% if(pages> 0){ %>
+                <nav class="mx-auto">
+                    <ul class="pagination  mt-3">
+
+                        <% if(current==1) {%>
+
+                            <li class="page-item disabled">
+                                <a class="page-link" href="#">Trang đầu</a>
+
+                            </li>
+                            <% } else {%>
+                                <li class="page-item">
+                                    <a class="page-link" href="/places">Trang đầu</a>
+                                </li>
+                                <% } %>
+
+                                    <% var i=(Number(current)> 3 ? Number(current) - 2 : 1) %>
+                                        <% if(i !==1){ %>
+                                            <li>
+                                                <a class="page-link" href="#">...</a>
+                                            </li>
+                                            <% } %>
+                                                <% for(; i <=(Number(current) + 2) && i <=pages; i++) { %>
+                                                    <% if(i==current) { %>
+                                                        <li class="page-item active">
+                                                            <a class="page-link" href="/places/page_<%= i %>">
+                                                                <%= i %>
+                                                            </a>
+                                                        </li>
+                                                        <% } else { %>
+                                                            <li class="page-item">
+                                                                <a class="page-link" href="/places/page_<%= i %>">
+                                                                    <%= i %>
+                                                                </a>
+                                                            </li>
+                                                            <% } %>
+                                                                <% if (i==Number(current) + 2 && i < pages) { %>
+                                                                    <li class="page-item disabled">
+                                                                        <a class="page-link" href="#">...</a>
+                                                                    </li>
+                                                                    <% } %>
+                                                                        <% } %>
+                                                                            <% if(current==pages) { %>
+                                                                                <li class="page-item disabled">
+                                                                                    <a class="page-link" href="#">
+                                                                                        Trang cuối
+                                                                                    </a>
+                                                                                </li>
+                                                                                <% } else { %>
+                                                                                    <li class="page-item">
+                                                                                        <a class="page-link"
+                                                                                            href="/places/page_<%= pages %>">
+                                                                                           Trang cuối
+                                                                                        </a>
+                                                                                    </li>
+                                                                                    <% } %>
+                    </ul>
+                </nav>
+                <% } %>
+
+        </div>
+
+
+    </div>
+    </div>
+    
+
+    <script src="/javascripts/clusterMap.js"></script>

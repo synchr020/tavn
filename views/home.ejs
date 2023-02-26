@@ -4,39 +4,42 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>YelpCamp</title>
+    <title>TAVN - Trang Tra Cứu Du Lịch Hàng Đầu Việt Nam</title>
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/5.0.0-alpha1/css/bootstrap.min.css"
         integrity="sha384-r4NyP46KrjDleawBgD5tp8Y7UzmLA05oM1iAEQ17CSuDqnUK2+k9luXQOfXJCJ4I" crossorigin="anonymous">
     <link rel="stylesheet" href="/stylesheets/home.css">
+    <link rel="icon" type="image/svg+xml"
+        href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 width=%22256%22 height=%22256%22 viewBox=%220 0 100 100%22><rect width=%22100%22 height=%22100%22 rx=%2220%22 fill=%22%2367f88d%22></rect><text x=%2250%%22 y=%2250%%22 dominant-baseline=%22central%22 text-anchor=%22middle%22 font-size=%2280%22>🔍</text></svg>" />
 </head>
 
 <body class="d-flex text-center text-white bg-dark">
     <div class="cover-container d-flex w-100 h-100 p-3 mx-auto flex-column">
         <header class="mb-auto">
             <div>
-                <h3 class="float-md-left mb-0">YelpCamp</h3>
+                <h3 class="float-md-left mb-0">TAVN</h3>
                 <nav class="nav nav-masthead justify-content-center float-md-right">
-                    <a class="nav-link active" aria-current="page" href="#">Home</a>
-                    <a class="nav-link" href="/campgrounds">Campgrounds</a>
+                    <a class="nav-link active" aria-current="page" href="#">Trang Chủ</a>
+                    <a class="nav-link " href="/places">Địa Điểm</a>
                     <% if(!currentUser) { %>
-                    <a class="nav-link" href="/login">Login</a>
-                    <a class="nav-link" href="/register">Register</a>
-                    <% } else { %>
-                    <a class="nav-link" href="/logout">Logout</a>
-                    <% } %>
+                        <a class="nav-link" href="/login">Đăng nhập</a>
+                        <a class="nav-link" href="/register">Đăng ký</a>
+                        <% } else { %>
+                            <a class="nav-link" href="/logout">Đăng xuất</a>
+                            <% } %>
                 </nav>
             </div>
         </header>
         <main class="px-3">
-            <h1>YelpCamp</h1>
-            <p class="lead"> Welcome to YelpCamp! <br> Jump right in and explore our many campgrounds. <br>
-                Feel free to share some of your own and comment on others!</p>
-            <a href="/campgrounds" class="btn btn-lg btn-secondary font-weight-bold border-white bg-white">View
-                Campgrounds</a>
+            <h1>TAVN</h1>
+            <p class="lead"> Bạn đang cần một nơi để đi du lịch trong nước?    
+            <br>Bạn lo lắng về chất lượng dịch vụ của khu du lịch nào đó, bạn muốn biết người đi trước
+                đánh giá?</p>
+            <a href="/places" class="btn btn-lg btn-secondary font-weight-bold border-white bg-white">Xem Ngay!
+            </a>
         </main>
 
         <footer class="mt-auto text-white-50">
-            <p>&copy; 2020 </p>
+            <p>&copy; Trần Thành Đạt | 2023</p>
         </footer>
 
 

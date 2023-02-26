@@ -1,0 +1,23 @@
+.dn2 {
+    background-color: #fff;
+    border-color: #fff;
+    color: #4d4e4f;
+    padding: 12px 24px;
+    font-weight: 500;
+}
+
+/* .btn-primary:hover, .btn-primary:focus {
+    background-color: #3c0cac;
+    border-color: #3c0cac;
+    color: #fff;
+} */
+
+.btn-bordered {
+    border: 0.1px solid #dedfe0;
+}
+
+
+
+/* .fa-google:hover {
+    color: #fff;
+} */

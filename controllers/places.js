@@ -4,18 +4,30 @@ const mbxGeocoding = require("@mapbox/mapbox-sdk/services/geocoding");
 const mapBoxToken = process.env.MAPBOX_TOKEN;
 const geocoder = mbxGeocoding({accessToken: mapBoxToken});
 module.exports.index = async (req, res) => {
+     
     const places = await Place.find({});
+         req.flash("error", 
+"TAVN version 1.0.1 đã hoàn thành! Cập nhật thêm đăng nhập bằng gu gồ và phân trang! Developed by Đạt - AaronOfROD");
+
     res.render("places/index", { places });
+     req.flash("error", 
+"TAVN version 1.0.1 đã hoàn thành! Cập nhật thêm đăng nhập bằng gu gồ và phân trang! Developed by Đạt - AaronOfROD");
+
     //khong can dau /
 }
 
 module.exports.renderNewForm = (req, res) => {
+        req.flash("error", 
+"TAVN version 1.0.1 đã hoàn thành! Cập nhật thêm đăng nhập bằng gu gồ và phân trang! Developed by Đạt - AaronOfROD");
+
     res.render("places/new")
 }
 
 module.exports.createPlace = async (req, res, next) => {
     
-   
+       req.flash("error", 
+"TAVN version 1.0.1 đã hoàn thành! Cập nhật thêm đăng nhập bằng gu gồ và phân trang! Developed by Đạt - AaronOfROD");
+
     const geoData = await geocoder.forwardGeocode({
         query:req.body.place.location,
         limit:1
@@ -33,8 +45,12 @@ module.exports.createPlace = async (req, res, next) => {
 
 module.exports.showPlace = async (req, res) => {
     // const places = await Place.find({});
+        req.flash("error", 
+"TAVN version 1.0.1 đã hoàn thành! Cập nhật thêm đăng nhập bằng gu gồ và phân trang! Developed by Đạt - AaronOfROD");
+
     res.render("places/show")
-    
+         req.flash("error", 
+"TAVN version 1.0.1 đã hoàn thành! Cập nhật thêm đăng nhập bằng gu gồ và phân trang! Developed by Đạt - AaronOfROD");
 
 
 }

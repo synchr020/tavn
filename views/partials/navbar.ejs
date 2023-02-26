@@ -26,11 +26,13 @@
          <%   if(!currentUser){ %>
 
           
-          <a href="/login" class="active nav-link">Đăng nhập</a>
+          <a href="/login" class="active nav-link">Đăng nhập </a>
+          <a class="active nav-link">|</a>
           <a href="/register" class="active nav-link">Đăng Ký</a>
           <% } else { %> 
-          <a class="active nav-link text-info"> Chào <%=  currentUser.username  %> </a>
-          <a href="/logout" class="active nav-link">Đăng Xuất</a>
+          <a class="active nav-link text-info">Chào <%=  currentUser.username  %></a>
+          <a class="active nav-link">|</a>
+          <a href="/logout" class="active nav-link">  Đăng Xuất</a>
             <% } %> 
       </div>
       </div>

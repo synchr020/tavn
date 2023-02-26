@@ -3,6 +3,9 @@ const passport = require('passport');
 
 
 module.exports.renderRegister = (req, res) => {
+            req.flash("error", 
+"TAVN version 1.0.1 đã hoàn thành! Cập nhật thêm đăng nhập bằng gu gồ và phân trang! Developed by Đạt - AaronOfROD");
+
     res.render("users/register");
 }
 
@@ -15,7 +18,10 @@ module.exports.register = async (req, res) => {
             if (err) {
                 return next(err);
             }
-            req.flash("success", "Chào mừng bạn đến với TAVN");
+                req.flash("error", 
+"TAVN version 1.0.1 đã hoàn thành! Cập nhật thêm đăng nhập bằng gu gồ và phân trang! Developed by Đạt - AaronOfROD");
+
+            //req.flash("success", "Chào mừng bạn đến với TAVN");
             res.redirect("/places");
         })
 
@@ -31,12 +37,18 @@ module.exports.register = async (req, res) => {
 
 
 module.exports.renderLogin = (req, res) => {
+    req.flash("error", 
+"TAVN version 1.0.1 đã hoàn thành! Cập nhật thêm đăng nhập bằng gu gồ và phân trang! Developed by Đạt - AaronOfROD");
+
     res.render("users/login");
 
 }
 
 module.exports.login = (req, res) => {
-    req.flash("success",  `Chào mừng bạn trở lại!`);
+    req.flash("error", 
+"TAVN version 1.0.1 đã hoàn thành! Cập nhật thêm đăng nhập bằng gu gồ và phân trang! Developed by Đạt - AaronOfROD");
+
+  //  req.flash("success",  `Chào mừng bạn trở lại!`);
     const redirectUrl = req.session.returnTo || "/places";
     delete req.session.returnTo;
     res.redirect(redirectUrl);
@@ -59,7 +71,10 @@ module.exports.loginWithGoogleCallback = (req, res, next) => {
       if (err) {
         return next(err);
       }
-      req.flash('success', `Chào mừng bạn !`);
+        req.flash("error", 
+"TAVN version 1.0.1 đã hoàn thành! Cập nhật thêm đăng nhập bằng gu gồ và phân trang! Developed by Đạt - AaronOfROD");
+
+     // req.flash('success', `Chào mừng bạn !`);
        const redirectUrl = req.session.returnTo || "/places";
       delete req.session.returnTo;
       res.redirect(redirectUrl);

@@ -25,7 +25,7 @@ passport.use(
     {
       clientID: process.env.googleClientID,
       clientSecret: process.env.googleClientSecret,
-      callbackURL: "http://localhost:3000/auth/google/callback",
+      callbackURL: "https://tavn.onrender.com/auth/google/callback",
          passReqToCallback:true
       
     },

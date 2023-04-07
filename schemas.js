@@ -3,7 +3,7 @@ const BaseJoi = require("joi");
 //const sanitizeHtml = require('sanitize-html');
 const extension = (joi) => ({
     type: 'string',
-    // base: joi.string(),
+     base: joi.string()
     // messages: {
     //     'string.escapeHTML': '{{#label}} must not include HTML!'
     // },

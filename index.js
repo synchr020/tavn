@@ -82,7 +82,7 @@ passport.use(new GoogleStrategy(
 {
       clientID: process.env.googleClientID,
       clientSecret: process.env.googleClientSecret,
-      callbackURL: 'hhttps://tavn.cyclic.app/auth/google/callback',
+      callbackURL: 'https://tavn.cyclic.app/auth/google/callback',
       passReqToCallback:true
       
     },

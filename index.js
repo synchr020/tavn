@@ -78,13 +78,11 @@ const sessionConfig = {
 
 }
 
-
-
 passport.use(new GoogleStrategy(
 {
       clientID: process.env.googleClientID,
       clientSecret: process.env.googleClientSecret,
-      callbackURL: 'https://tavn.onrender.com/auth/google/callback',
+      callbackURL: 'hhttps://tavn.cyclic.app/auth/google/callback',
       passReqToCallback:true
       
     },

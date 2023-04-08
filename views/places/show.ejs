@@ -124,7 +124,12 @@
           
             <div class="mb-5"></div>
 
+            <% } else { %>
+              <div class="alert alert-primary" role="alert">
+ Bạn cần phải <a href="/login" class="alert-link">Đăng nhập</a> để đánh giá địa điểm du lịch này.
+</div>
             <% } %>
+            
             <hr>
               <% for (let review of reviews) { %>
 

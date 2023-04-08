@@ -38,9 +38,12 @@ module.exports.renderLogin = (req, res) => {
 }
 
 module.exports.login = (req, res) => {
+    //|| "/places"
     
-    const redirectUrl = req.session.returnTo || "/places";
+    const redirectUrl = req.session.returnTo || "/places" ;
+    
     delete req.session.returnTo;
+    
     req.flash("success",  `Chào mừng bạn trở lại!`);
     res.redirect(redirectUrl);
     

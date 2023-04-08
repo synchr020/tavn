@@ -64,6 +64,7 @@ module.exports.loginWithGoogleCallback = (req, res, next) => {
       }
        const redirectUrl = req.session.returnTo || "/places";
       delete req.session.returnTo;
+      req.flash("success",  `Chào mừng bạn trở lại!`);
       res.redirect(redirectUrl);
       
     });
